@@ -22,20 +22,28 @@ android {
         configureEach {
             //应用名
             //app name
-            resValue("string","app_name","XXX Renderer")
+            resValue("string","app_name","GL4ES Plus")
             //包名后缀
             //package name Suffix
-            applicationIdSuffix = ".xxx"
+            applicationIdSuffix = ".gl4esplus"
 
             //渲染器在启动器内显示的名称
             //The name displayed by the renderer in the launcher
-            manifestPlaceholders["des"] = ""
+            manifestPlaceholders["des"] = "GL4ES Plus"
             //渲染器的具体定义 格式为 名称:渲染器库名:EGL库名 例如 LTW:libltw.so:libltw.so
             //The specific definition format of a renderer is ${name}:${renderer library name}:${EGL library name}, for example:   LTW:libltw.so:libltw.so
-            manifestPlaceholders["renderer"] = ""
+            manifestPlaceholders["renderer"] = "GL4ES Plus:libgl4es_plus.so:/libEGL_angle.so"
 
             manifestPlaceholders["boatEnv"] = mutableMapOf<String,String>().apply {
-
+                put("LIBGL_ES", "3")
+                put("LIBGL_MIPMAP", "3")
+                put("LIBGL_NORMALIZE", "1")
+                put("LIBGL_NOINTOVLHACK", "1")
+                put("LIBGL_SHADERCONVERTER", "1")
+                put("LIBGL_GL", "21")
+                put("LIBGL_USEVBO", "1")
+                put("LIBGL_BACKEND_ANGLE", "1")
+                put("DLOPEN", "libGLESv2_angle.so,libEGL_angle.so,libshaderconv.so")
             }.run {
                 var env = ""
                 forEach { (key, value) ->
@@ -45,7 +53,16 @@ android {
             }
 
             manifestPlaceholders["pojavEnv"] = mutableMapOf<String,String>().apply {
-
+                put("POJAV_RENDERER", "opengles3")
+                put("LIBGL_ES", "3")
+                put("LIBGL_MIPMAP", "3")
+                put("LIBGL_NORMALIZE", "1")
+                put("LIBGL_NOINTOVLHACK", "1")
+                put("LIBGL_SHADERCONVERTER", "1")
+                put("LIBGL_GL", "21")
+                put("LIBGL_USEVBO", "1")
+                put("LIBGL_BACKEND_ANGLE", "1")
+                put("DLOPEN", "libGLESv2_angle.so,libEGL_angle.so,libshaderconv.so")
             }.run {
                 var env = ""
                 forEach { (key, value) ->
